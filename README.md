@@ -23,4 +23,4 @@ Participants should have a basic understanding of biology, particularly in neuro
 This workshop will have immediate application for those working in the field of neuroscience or related areas, providing tools and knowledge that can be applied to the analysis of complex neuroinformatics data. Participants will leave with practical skills in data preprocessing and analysis that can be directly used in their research projects or professional work. The workshop will also serve as a foundation for further exploration of advanced neuroinformatics techniques.
 
 ## Location & Time
-Location: [Room 205, Conference Center, Bingham University] Date: [3rd September 2024] Time: 1:00 AM - 12:00 PM (Local Time)
+Location: Room 205, Conference Center, Bingham University,  Date: 3rd September 2024, Time: 1:00 AM - 12:00 PM (Local Time)
