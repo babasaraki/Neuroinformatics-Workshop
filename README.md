@@ -1,4 +1,8 @@
-# Neuroinformatics-Workshop
+# Neuroinformatics Workshop
+
+| Audience | Computational skills required | Duration |
+:----------|:---------------|:----------|
+| Biologists | [Beginner bash](https://hbctraining.github.io/Intro-to-Shell/) | 2 hour workshop (~2 hours of trainer-led time)|
 
 ## Overview
 This workshop, titled "Introduction to Neuroinformatics", is designed to provide participants with a foundational understanding of bioinformatics as applied to neuroscience. Over the course of two hours, attendees will be introduced to key concepts in neuroinformatics, including neurotranscriptomics, data preprocessing, and the integration of brain imaging data. The session will combine theoretical knowledge with practical demonstrations to equip participants with the skills needed to analyze and interpret complex neuroinformatics data.
@@ -15,6 +19,7 @@ By the end of the workshop, participants will be able to:
 - Integrate and analyze brain imaging data using neuroinformatics tools and techniques.
 - Access and navigate relevant neuroinformatics resources and databases.
 
+> These materials are designed for both instructor-led workshops and for learners to use on their own.
 
 ## Prerequisites
 Participants should have a basic understanding of biology, particularly in neuroscience or molecular biology. Familiarity with general bioinformatics concepts and tools, such as sequence alignment and data analysis, will be beneficial but is not mandatory. Prior experience with coding in Python or R is recommended for the practical components of the workshop.
@@ -37,6 +42,13 @@ Participants are required to bring:
 
 A laptop with internet access.
 Pre-installed software: Python (with relevant libraries such as NumPy, Pandas, and SciPy), Jupyter Notebook, and R (if applicable). Installation guides and links will be provided before the workshop.
+
+***Mac users:***
+No installation requirements.
+
+***Windows users:***
+[GitBash](https://git-scm.com/download/win)
+
 (Optional) A GitHub account to clone the repository and follow along with the exercises.
 
 ## Support & Follow-up
@@ -46,5 +58,8 @@ Certificate of Participation: Participants who complete the workshop will receiv
 ## Contact Information
 For any queries regarding the workshop, please contact:
 
-Dr. Umar Ahmad: [Your Email Address]
+Dr. Umar Ahmad: umarahmad@basug.edu.ng 
 Workshop Coordinator: Professor Barnabas Danborno
+
+***
+*These materials have been developed by members of the teaching team at the [Centre for Genomics and Bioinformatics (CGB)](https://www.bioseqc.com). These are open access materials distributed under the terms of the [Creative Commons Attribution license](https://creativecommons.org/licenses/by/4.0/) (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.*
