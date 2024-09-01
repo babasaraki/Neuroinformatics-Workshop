@@ -2,7 +2,7 @@
 
 | Audience | Computational skills required | Duration |
 :----------|:---------------|:----------|
-| Biologists | [Beginner bash](https://hbctraining.github.io/Intro-to-Shell/) | 2 hour workshop (~2 hours of trainer-led time)|
+| Biologists | [Introduction to the Unix Command Line](https://cambiotraining.github.io/unix-shell/) | 2 hour workshop (~2 hours of trainer-led time)|
 
 ## Overview
 This workshop, titled "Introduction to Neuroinformatics", is designed to provide participants with a foundational understanding of bioinformatics as applied to neuroscience. Over the course of two hours, attendees will be introduced to key concepts in neuroinformatics, including neurotranscriptomics, data preprocessing, and the integration of brain imaging data. The session will combine theoretical knowledge with practical demonstrations to equip participants with the skills needed to analyze and interpret complex neuroinformatics data.
