@@ -59,7 +59,7 @@ Certificate of Participation: Participants who complete the workshop will receiv
 For any queries regarding the workshop, please contact:
 
 Dr. Umar Ahmad: umarahmad@basug.edu.ng 
-Workshop Coordinator: Professor Barnabas Danborno
+Workshop Coordinator: Professor Barnabas Danborno - sbdanborno@abu.edu.ng
 
 ***
 *These materials have been developed by members of the teaching team at the [Centre for Genomics and Bioinformatics (CGB)](https://www.bioseqc.com). These are open access materials distributed under the terms of the [Creative Commons Attribution license](https://creativecommons.org/licenses/by/4.0/) (CC BY 4.0), which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.*
