@@ -52,13 +52,13 @@ No installation requirements.
 (Optional) A GitHub account to clone the repository and follow along with the exercises.
 
 ## Support & Follow-up
-Post-Workshop Support: A dedicated Slack channel or email group will be set up for participants to ask follow-up questions and discuss the workshop content.
+Post-Workshop Support: A dedicated Slack channel will be set up for participants to ask follow-up questions and discuss the workshop content.
 Certificate of Participation: Participants who complete the workshop will receive a certificate of participation.
 
 ## Contact Information
 For any queries regarding the workshop, please contact:
 
-Dr. Umar Ahmad: umarahmad@basug.edu.ng 
+Instructor: Dr. Umar Ahmad - umarahmad@basug.edu.ng 
 Workshop Coordinator: Professor Barnabas Danborno - sbdanborno@abu.edu.ng
 
 ***
