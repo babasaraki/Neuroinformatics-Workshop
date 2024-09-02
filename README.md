@@ -41,7 +41,7 @@ A list of recommended readings and resources for further study.
 Participants are required to bring:
 
 A laptop with internet access.
-Pre-installed software: Python (with relevant libraries such as NumPy, Pandas, and SciPy), Jupyter Notebook, and R (if applicable). Installation guides and links will be provided before the workshop.
+Pre-installed software: Python (with relevant libraries such as NumPy, Pandas, and SciPy), Jupyter Notebook, and R. Installation guides and links will be provided before the workshop.
 
 ***Mac users:***
 No installation requirements.
