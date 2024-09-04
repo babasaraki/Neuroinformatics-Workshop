@@ -1,0 +1,654 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Introduction to NGS},
+  pdfauthor={Dr.~Umar Ahmad},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Introduction to NGS}
+\author{Dr.~Umar Ahmad}
+\date{September 3, 2024}
+
+\begin{document}
+\maketitle
+
+\paragraph{Learning Objectives}\label{learning-objectives}
+
+After this section you should be able to:
+
+\begin{itemize}
+\tightlist
+\item
+  List the main high-throughput sequencing technologies in use.
+\item
+  Describe the main differences between Illumina and Oxford Nanopore
+  platforms, including their advantages and disadvantages.
+\item
+  Recognise the structure of common file formats in bioinformatics, in
+  particular FASTQ, FASTA, GFF3 and CSV/TSV.
+\end{itemize}
+
+\subsection{Next Generation
+Sequencing}\label{next-generation-sequencing}
+
+The sequencing of genomes has become more routine due to the
+\href{https://www.genome.gov/about-genomics/fact-sheets/DNA-Sequencing-Costs-Data}{rapid
+drop in DNA sequencing costs} seen since the development of Next
+Generation Sequencing (NGS) technologies in 2007. One main feature of
+these technologies is that they are \emph{high-throughput}, allowing one
+to more fully characterise the genetic material in a sample of interest.
+
+There are three main technologies in use nowadays, often referred to as
+2nd and 3rd generation sequencing:
+
+\begin{itemize}
+\tightlist
+\item
+  Illumina's sequencing by synthesis (2nd generation)
+\item
+  Oxford Nanopore Technologies, shortened ONT (3rd generation)
+\item
+  Pacific Biosciences, shortened PacBio (3rd generation)
+\end{itemize}
+
+The video below from the iBiology team gives a great overview of these
+technologies.
+
+\subsubsection{Illumina Sequencing}\label{illumina-sequencing}
+
+Illumina's technology has become a widely popular method, with many
+applications to study transcriptomes (RNA-seq), epigenomes (ATAC-seq,
+BS-seq), DNA-protein interactions (ChIP-seq), chromatin conformation
+(Hi-C/3C-Seq), population and quantitative genetics (variant detection,
+GWAS), de-novo genome assembly, amongst
+\href{https://emea.illumina.com/content/dam/illumina-marketing/documents/products/research_reviews/sequencing-methods-review.pdf}{many
+others}.
+
+An overview of the sequencing procedure is shown in the animation video
+below. Generally, samples are processed to generate so-called sequencing
+libraries, where the genetic material (DNA or RNA) is processed to
+generate fragments of DNA with attached oligo adapters necessary for the
+sequencing procedure (if the starting material is RNA, it can be
+converted to DNA by a step of reverse transcription). Each of these DNA
+molecule is then sequenced from both ends, generating pairs of sequences
+from each molecule, i.e.~\textbf{paired-end sequencing} (single-end
+sequencing, where the molecule is only sequenced from one end is also
+possible, although much less common nowadays).
+
+This technology is a type of \textbf{short-read sequencing}, because we
+only obtain short sequences from the original DNA molecules. Typical
+protocols will generate 2x50bp to 2x250bp sequences (the 2x denotes that
+we sequence from each end of the molecule).
+
+The main advantage of Illumina sequencing is that it produces very
+\textbf{high-quality sequence reads} (error rate \textless1\%) at a low
+cost. However, we only get \textbf{very short sequences}, which is a
+limitations when it comes to resolving problems such as long sequence
+repeats (e.g.~around centromeres or transposon-rich areas of the
+genome), distinguishing gene isoforms (in RNA-seq), or resolving
+haplotypes (combinations of variants in each copy of an individual's
+diploid genome).
+
+\textbf{In summary, Illumina:}
+
+\begin{itemize}
+\tightlist
+\item
+  Utilizes sequencing-by-synthesis chemistry.
+\item
+  Offers short read lengths.
+\item
+  Known for high accuracy with low error rates (\textless1\%).
+\item
+  Well-suited for applications like DNA resequencing and variant
+  detection.
+\item
+  Scalable and cost-effective for large-scale projects.
+\item
+  Limited in sequencing long DNA fragments.
+\item
+  Expensive to set up.
+\end{itemize}
+
+\subsubsection{Nanopore Sequencing}\label{nanopore-sequencing}
+
+Nanopore sequencing, a form of \textbf{long-read sequencing technology},
+has distinct advantages in the field of genomics. It excels in its
+ability to sequence exceptionally lengthy DNA molecules, including those
+reaching megabase sizes, thus effectively addressing that limitation of
+short-read sequencing. The \textbf{portability} of some nanopore
+sequencing devices is another advantageous feature; some are designed to
+operate via a simple USB connection to a standard laptop, making it
+exceptionally adaptable for on-the-go applications, including fieldwork.
+
+\begin{figure}
+\centering
+\includegraphics{https://media.springernature.com/full/springer-static/image/art\%3A10.1038\%2Fs41587-021-01108-x/MediaObjects/41587_2021_1108_Fig1_HTML.png?as=webp}
+\caption{Overview of Nanopore sequencing showing the highly-portable
+MinION device. The device contains thousands of nanopores embedded in a
+membrane where current is applied. As individual DNA molecules pass
+through these nanopores they cause changes in this current, which is
+detected by sensors and read by a dedicated computer program. Each DNA
+base causes different changes in the current, allowing the software to
+convert this signal into base calls. Source: Fig. 1 in
+\href{https://doi.org/10.1038/s41587-021-01108-x}{Wang et al.~2021}}
+\end{figure}
+
+However, optimising this technology presents some challenges, notably in
+the production of sequencing libraries containing high molecular weight
+and intact DNA. It's important to note that nanopore sequencing
+historically exhibited \textbf{higher error rates}, approximately 5\%
+for older chemistries, compared to Illumina sequencing. However,
+significant advancements have emerged, enhancing the accuracy of
+nanopore sequencing technology, now achieving
+\href{https://nanoporetech.com/accuracy}{accuracy rates exceeding 99\%}.
+
+\textbf{In summary, ONT:}
+
+\begin{itemize}
+\tightlist
+\item
+  Operates on the principle of nanopore technology.
+\item
+  Provides long read lengths, ranging from thousands to tens of
+  thousands of base pairs.
+\item
+  Ideal for applications requiring long-range information, such as
+  \emph{de novo} genome assembly and structural variant analysis.
+\item
+  Portable, enabling fieldwork and real-time sequencing.
+\item
+  Exhibits higher error rates (around 5\%), with improvements in recent
+  versions.
+\item
+  Costs can be higher per base, compared to Illumina for certain
+  projects.
+\end{itemize}
+
+\paragraph{Which technology to
+choose?}\label{which-technology-to-choose}
+
+Both of these platforms have been widely popular for bacterial
+sequencing. They can both generate data with high-enough quality for the
+assembly and analysis for most of the pathogen genomic surveillance.
+Mostly, which one you use will depend on what sequencing facilities you
+have access to.
+
+While Illumina provides the cheapest option per sample of the two, it
+has a higher setup cost, requiring access to the expensive sequencing
+machines. On the other hand, Nanopore is a very flexible platform,
+especially its portable MinION devices. They require less up-front cost
+allowing getting started with sequencing very quickly in a standard
+molecular biology lab.
+
+\subsection{Bioinformatics file formats}\label{sec-file-formats}
+
+Bioinformatics relies on various standard file formats for storing
+diverse types of data. In this section, we'll discuss some of the key
+ones we'll encounter, although there are numerous others. You can refer
+to the ``\href{../appendices/01-file_formats.md}{Common file formats}''
+appendix for a more comprehensive list.
+
+\subsubsection{FAST5}\label{fast5}
+
+FAST5 is a proprietary format developed by ONT and serves as the
+standard format generated by its sequencing devices. It is based on the
+hierarchical data format HDF5, designed for storing extensive and
+intricate data. Unlike text-based formats like FASTA and FASTQ, FAST5
+files are binary, necessitating specialized software for opening and
+reading.
+
+Within these files, you'll find a \texttt{Raw/} field containing the
+original raw current signal measurements. Additionally, tools like
+basecallers can add \texttt{Analyses/} fields, converting signals into
+standard FASTQ data (e.g., Guppy basecaller).
+
+Typically, manual inspection of these files is unnecessary, as
+specialized software is used for processing them. For more in-depth
+information about this format, you can refer to
+\href{https://static-content.springer.com/esm/art\%3A10.1038\%2Fs41587-021-01147-4/MediaObjects/41587_2021_1147_MOESM1_ESM.pdf}{this
+resource}.
+
+\subsubsection{FASTQ}\label{fastq}
+
+FASTQ files are used to store \textbf{nucleotide sequences along with a
+quality score} for each nucleotide of the sequence. These files are the
+typical format \textbf{obtained from NGS sequencing} platforms such as
+Illumina and Nanopore (after basecalling). Common file extensions used
+for this format include \texttt{.fastq} and \texttt{.fq}.
+
+The file format is as follows:
+
+\begin{verbatim}
+@SEQ_ID                   <-- SEQUENCE NAME
+AGCGTGTACTGTGCATGTCGATG   <-- SEQUENCE
++                         <-- SEPARATOR
+%%).1***-+*''))**55CCFF   <-- QUALITY SCORES
+\end{verbatim}
+
+In FASTQ files each sequence is always represented across 4 lines. The
+quality scores are encoded in a compact form, using a single character.
+They represent a score that can vary between 0 and 40 (see
+\href{https://support.illumina.com/help/BaseSpace_OLH_009008/Content/Source/Informatics/BS/QualityScoreEncoding_swBS.htm}{Illumina's
+Quality Score Encoding}). The reason single characters are used to
+encode the quality scores is that it saves space when storing these
+large files. Software that work on FASTQ files automatically convert
+these characters into their score, so we don't have to worry about doing
+this conversion ourselves.
+
+The quality value in common use is called a \textbf{Phred score} and it
+represents the \textbf{probability that the base is an error}. For
+example, a base with quality 20 has a probability
+\(10^{-2} = 0.01 = 1\%\) of being an error. A base with quality 30 has
+\(10^{-3} = 0.001 = 0.1\%\) chance of being an error. Typically, a Phred
+score threshold of \textgreater20 or \textgreater30 is used when
+applying quality filters to sequencing reads.
+
+Because FASTQ files tend to be quite large, they are \textbf{often
+compressed} to save space. The most common compression format is called
+\emph{gzip} and uses the extension \texttt{.gz}. To look at a
+\emph{gzip} file, we can use the command \texttt{zcat}, which
+decompresses the file and prints the output as text.
+
+For example, we can use the following command to count the number of
+lines in a compressed FASTQ file:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{zcat}\NormalTok{ sequences.fq.gz }\KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}
+\end{Highlighting}
+\end{Shaded}
+
+If we want to know how many sequences there are in the file, we can
+divide the result by 4 (since each sequence is always represented across
+four lines).
+
+\subsubsection{FASTA}\label{fasta}
+
+FASTA files are used to store \textbf{nucleotide or amino acid
+sequences}. Common file extensions used for this format include
+\texttt{.fasta}, \texttt{.fa}, \texttt{.fas} and \texttt{.fna}.
+
+The general structure of a FASTA file is illustrated below:
+
+\begin{verbatim}
+>sample01                 <-- NAME OF THE SEQUENCE
+AGCGTGTACTGTGCATGTCGATG   <-- SEQUENCE ITSELF
+\end{verbatim}
+
+Each sequence is represented by a name, which always starts with the
+character \texttt{\textgreater{}}, followed by the actual sequence.
+
+A FASTA file can contain several sequences, for example:
+
+\begin{verbatim}
+>sample01
+AGCGTGTACTGTGCATGTCGATG
+>sample02
+AGCGTGTACTGTGCATGTCGATG
+\end{verbatim}
+
+Each sequence can sometimes span multiple lines, and separate sequences
+can always be identified by the \texttt{\textgreater{}} character. For
+example, this contains the same sequences as above:
+
+\begin{verbatim}
+>sample01      <-- FIRST SEQUENCE STARTS HERE
+AGCGTGTACTGT
+GCATGTCGATG
+>sample02      <-- SECOND SEQUENCE STARTS HERE
+AGCGTGTACTGT
+GCATGTCGATG
+\end{verbatim}
+
+To count how many sequences there are in a FASTA file, we can use the
+following command:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{grep} \StringTok{"\textgreater{}"}\NormalTok{ sequences.fa }\KeywordTok{|} \FunctionTok{wc} \AttributeTok{{-}l}
+\end{Highlighting}
+\end{Shaded}
+
+In two steps:
+
+\begin{itemize}
+\tightlist
+\item
+  find the lines containing the character ``\textgreater{}'', and then
+\item
+  count the number of lines of the result.
+\end{itemize}
+
+FASTA files are commonly used to \textbf{store genome sequences}, after
+they have been assembled. We will see FASTA files several times
+throughout these materials, so it's important to be familiar with them.
+
+\subsubsection{GFF3}\label{gff3}
+
+The \textbf{GFF3 (Generic Feature Format version 3)} is a standardized
+file format used in bioinformatics to describe genomic features and
+annotations. It primarily serves as a structured and human-readable way
+to represent information about genes, transcripts, and other biological
+elements within a genome. Common file extensions used for this format
+include \texttt{.gff} and \texttt{.gff3}.
+
+Key characteristics of the GFF3 format include:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Tab-delimited columns:} GFF3 files consist of tab-delimited
+  columns, making them easy to read and parse.
+\item
+  \textbf{Hierarchical structure:} the format supports a hierarchical
+  structure, allowing the description of complex relationships between
+  features. For instance, it can represent genes containing multiple
+  transcripts, exons, and other elements.
+\item
+  \textbf{Nine standard columns:} this includes information such as the
+  sequence identifier (e.g.~chromosome), feature type (e.g.~gene, exon),
+  start and end coordinates, strand and several attributes.
+\item
+  \textbf{Attributes field:} the ninth column, known as the
+  ``attributes'' field, contains additional information in a key-value
+  format. This field is often used to store details like gene names,
+  IDs, and functional annotations.
+\item
+  \textbf{Comments:} GFF3 files can include comment lines starting with
+  a ``\#'' symbol to provide context or documentation.
+\end{itemize}
+
+GFF3 is widely supported by various bioinformatics tools and databases,
+making it a versatile format for storing and sharing genomic
+annotations.
+
+\subsubsection{CSV/TSV}\label{csvtsv}
+
+\textbf{Comma-separated values} (CSV) and \textbf{tab-separated values}
+(TSV) files are text-based formats commonly used to store
+\textbf{tabular data}. While strictly not specific to bioinformatics,
+they are commonly used as the output of bioinformatic software. CSV
+files usually have \texttt{.csv} extension, while TSV files often have
+\texttt{.tsv} or the more generic \texttt{.txt} extension.
+
+In both cases, the data is organized into rows and columns. Rows are
+represented across different lines of the file, while the columns are
+separated using a \textbf{delimiting character}: a command \texttt{,} in
+the case of CSV files and a tab space (tab ↹) for TSV files.
+
+For example, for this table:
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+sample & date & strain \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+VCH001 & 2023-08-01 & O1 El Tor \\
+VCH002 & 2023-08-02 & O1 Classical \\
+VCH003 & 2023-08-03 & O139 \\
+VCH004 & 2023-08-04 & Non-O1 Non-O139 \\
+\end{longtable}
+
+This would be its representation as a CSV file:
+
+\begin{verbatim}
+sample,date,strain
+VCH001,2023-08-01,O1 El Tor
+VCH002,2023-08-02,O1 Classical
+VCH003,2023-08-03,O139
+VCH004,2023-08-04,Non-O1 Non-O139
+\end{verbatim}
+
+And this is its representation as a TSV file (the space between columns
+is a tab ↹):
+
+\begin{verbatim}
+sample    date        strain
+VCH001    2023-08-01  O1 El Tor
+VCH002    2023-08-02  O1 Classical
+VCH003    2023-08-03  O139
+VCH004    2023-08-04  Non-O1 Non-O139
+\end{verbatim}
+
+CSV and TSV files are human-readable and can be opened and edited using
+\textbf{basic text editors} or \textbf{spreadsheet software} like
+\emph{Microsoft Excel}.
+
+\subsection{Summary}\label{summary}
+
+\paragraph{Key Points}\label{key-points}
+
+\begin{itemize}
+\tightlist
+\item
+  High-throughput sequencing technologies, often called next-generation
+  sequencing (NGS), enable rapid and cost-effective genome sequencing.
+\item
+  Prominent NGS platforms include Illumina, Oxford Nanopore Technologies
+  (ONT) and Pacific Biosciences (PacBio).
+\item
+  Each platform employs distinct mechanisms for DNA sequencing, leading
+  to variations in read length, error rates, and applications.
+\item
+  Illumina sequencing:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Uses sequencing-by-synthesis chemistry, produces short read lenghts
+    and has high accuracy with low error rates (\textless1\%).
+  \item
+    While it is scalable and cost-effective for large-scale projects, it
+    is expensive to set up and limited in sequencing long DNA fragments.
+  \end{itemize}
+\item
+  Nanopore sequencing:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Uses nanopore technology, provides long read lengths, making it
+    ideal for applications such as \emph{de novo} genome assembly.
+  \item
+    Although the costs can be higher per base, it is cheaper to set up.
+  \item
+    Exhibits higher error rates (around 5\%), but with significant
+    improvements in recent versions (1\%).
+  \end{itemize}
+\item
+  Common file formats in bioinformatics include FASTQ, FASTA and GFF.
+  These are all text-based formats.
+\item
+  FASTQ format (\texttt{.fastq} or \texttt{.fq}):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Designed to store sequences along with quality scores.
+  \item
+    Contains a sequence identifier, sequence data, a separator line and
+    quality scores.
+  \item
+    Widely used for storing \textbf{sequence reads generated by NGS
+    platforms}.
+  \end{itemize}
+\item
+  FASTA format (\texttt{.fasta}, \texttt{.fa}, \texttt{.fas},
+  \texttt{.fna}):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Is used for storing biological sequences, including DNA, RNA, and
+    protein.
+  \item
+    It Comprises a sequence identifier (often preceded by
+    ``\textgreater{}'') and the sequence data.
+  \item
+    Commonly used for sequence storage and exchange of \textbf{genome
+    sequences}.
+  \end{itemize}
+\item
+  GFF format (\texttt{.gff} or \texttt{.gff3}):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    A structured, tab-delimited format for describing genomic features
+    and annotations.
+  \item
+    Consists of nine standard columns, including sequence identifier,
+    feature type, start and end coordinates, strand information, and
+    attributes.
+  \item
+    Facilitates the representation of genes, transcripts, and other
+    genomic elements, supporting hierarchical structures and metadata.
+  \item
+    Commonly used for storing and sharing \textbf{genomic annotation}
+    data in bioinformatics.
+  \end{itemize}
+\item
+  CSV (\texttt{.csv}) and TSV (\texttt{.tsv}):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Plain text formats to store tables.
+  \item
+    The columns in the CSV format are delimited by comma, whereas in the
+    TSV format by a tab.
+  \item
+    These files can be opened in standard spreadsheet software such as
+    \emph{Excel}.
+  \end{itemize}
+\end{itemize}
+
+\section{Further reading}\label{further-reading}
+
+\textbf{SAM format:}
+
+\url{https://www.samformat.info/sam-format-flag}
+\url{http://samtools.github.io/hts-specs/SAMv1.pdf} CRAM format:
+\url{https://www.ebi.ac.uk/sites/ebi.ac.uk/files/groups/ena/documents/cram_format_1.0.1.pdf}
+
+\textbf{GFF3 format:}
+\url{https://learn.gencore.bio.nyu.edu/ngs-file-formats/gff3-format/}
+
+\textbf{Embl file format:}
+\url{http://scikit-bio.org/docs/0.5.3/generated/skbio.io.format.embl.html}
+
+\end{document}
