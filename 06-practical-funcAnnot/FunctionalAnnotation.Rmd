@@ -1,0 +1,278 @@
+---
+title: "Practical Functional Annotation"
+author: "Dr. Umar Ahmad"
+date: "September 3, 2024"
+output:
+  html_document:
+    df_print: paged
+  word_document: default
+  pdf_document: default
+  html_notebook: default
+institute: Sa'adu Zungur University
+---
+
+```{r setup, include=FALSE}
+# Set CRAN mirror to avoid the 'CRAN mirror not set' error
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+```
+
+```{r loading packages, message=FALSE}
+# installing packages from the CRAN repo
+install.packages('tidyverse')
+install.packages('reshape2')
+install.packages('dendextend')
+
+# Installing packages from the Bioconductor repo
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("edgeR")
+BiocManager::install("DESeq2")
+BiocManager::install("TxDb.Mmusculus.UCSC.mm10.knownGene")
+BiocManager::install("org.Mm.eg.db")
+BiocManager::install("clusterProfiler")
+BiocManager::install("ReactomePA")
+BiocManager::install("enrichplot")
+
+# Import Libraries and Functions
+library(tidyverse)
+library(DESeq2)
+library(edgeR)
+library(reshape2)
+library(dendextend)
+
+library(TxDb.Mmusculus.UCSC.mm10.knownGene)
+library(org.Mm.eg.db)
+library(clusterProfiler)
+library(ReactomePA)
+library(enrichplot)
+```
+
+```{r}
+load("../05-PracticalDiffExp/scripts/DIffExpResults.RData")
+
+```
+
+## DIfferential Expression
+```{r}
+# want to focus on the differences between FearConditioned dVenus+ and dVenus- cells
+# so I will subset this analysis for those cells
+
+metadata =
+  metadata %>% 
+  filter(Treatment %in% "Fear Conditioned")
+
+metadata
+
+countsFC = counts[, metadata$GEO_Accession]
+countsFC
+```
+```{r}
+
+dds<-DESeqDataSetFromMatrix(countData = countsFC,
+                            colData = metadata,
+                            design = ~ Cell_type) 
+dds<-DESeq(dds)
+```
+
+### visualizing normalized counts
+```{r}
+vsd <- vst(dds, blind =FALSE)
+mat <-assay(vsd)
+head(as.data.frame(mat))
+```
+```{r}
+dend = t(mat) %>% 
+  scale %>% 
+  dist %>% 
+  hclust %>% 
+  as.dendrogram 
+
+l = metadata$Cell_type[ metadata$GEO_Accession %in% labels(dend)]
+dend %>% 
+  set("labels", l) %>% 
+  plot
+
+```
+```{r}
+mat.pca<-prcomp(t(mat)) #perform PCA
+summary(mat.pca)
+```
+
+```{r}
+#Extract PCA scrores
+scores <-as.data.frame(mat.pca$x) 
+scores
+
+```
+```{r, message=FALSE}
+
+scores %>% 
+  mutate(GEO_Accession = rownames(scores)) %>% 
+  left_join(metadata) %>% 
+  ggplot(aes(PC1, PC2, color = Cell_type))+
+  geom_point()
+
+
+```
+
+```{r}
+# Getting deseq results 
+minusvplus= results(dds, contrast = c("Cell_type", "dVenus_plus", "dVenus_minus"), tidy = TRUE)
+
+# reformatting results
+pval=.05
+lfc=1.5
+# Fear Conditioned v Control
+ minusvplus = 
+   minusvplus %>% 
+   mutate(sig = ifelse(log2FoldChange > lfc & padj < pval, "UP", (ifelse(log2FoldChange < -lfc & padj < pval, "DOWN", "not sig")) )) %>% 
+  mutate(SYMBOL=counts$SYMBOL)
+
+
+head(minusvplus)
+
+```
+
+```{r}
+table(minusvplus$sig)
+```
+```{r}
+minusvplus$SYMBOL[minusvplus$sig %in% c("UP", "DOWN")]
+
+```
+
+## Functional Annotation
+```{r}
+GOI = minusvplus$SYMBOL[minusvplus$sig %in% c("UP")]
+genesUP.df = bitr(GOI, fromType = "SYMBOL", toType = c("ENSEMBL", "SYMBOL", "ENTREZID"), OrgDb = org.Mm.eg.db)
+genesUP.df
+
+GOI = minusvplus$SYMBOL[minusvplus$sig %in% c("DOWN")]
+genesDOWN.df = bitr(GOI, fromType = "SYMBOL", toType = c("ENSEMBL", "SYMBOL", "ENTREZID"), OrgDb = org.Mm.eg.db)
+genesDOWN.df
+
+GOI = minusvplus$SYMBOL[minusvplus$sig %in% c("UP", "DOWN")]
+genesDE.df = bitr(GOI, fromType = "SYMBOL", toType = c("ENSEMBL", "SYMBOL", "ENTREZID"), OrgDb = org.Mm.eg.db)
+genesDE.df
+```
+
+
+
+```{r, fig.width=12, fig.height=7}
+# GO Enrichment analysis 
+GO_CC_u =  enrichGO(gene = genesUP.df$ENSEMBL,
+         OrgDb = org.Mm.eg.db,
+         keyType = "ENSEMBL",
+         ont = "CC",
+         pAdjustMethod = "BH",
+         pvalueCutoff = 0.01,
+         qvalueCutoff = 0.05)
+
+goplot(GO_CC_u)
+
+GO_BP_u =  enrichGO(gene = genesUP.df$ENSEMBL,
+         OrgDb = org.Mm.eg.db,
+         keyType = "ENSEMBL",
+         ont = "BP",
+         pAdjustMethod = "BH",
+         pvalueCutoff = 0.01,
+         qvalueCutoff = 0.05)
+
+goplot(GO_BP_u)
+```
+
+```{r, fig.width=12, fig.height=7}
+
+
+GO_CC_d =  enrichGO(gene = genesDOWN.df$ENSEMBL,
+         OrgDb = org.Mm.eg.db, 
+         keyType = "ENSEMBL",
+         ont = "CC",
+         pAdjustMethod = "BH",
+         pvalueCutoff = 0.01,
+         qvalueCutoff = 0.05)
+  
+goplot(GO_CC_d)
+
+GO_BP_d =  enrichGO(gene = genesDOWN.df$ENSEMBL,
+         OrgDb = org.Mm.eg.db, 
+         keyType = "ENSEMBL",
+         ont = "BP",
+         pAdjustMethod = "BH",
+         pvalueCutoff = 0.01,
+         qvalueCutoff = 0.05)
+  
+goplot(GO_BP_d)
+```
+
+```{r, fig.width= 12, fig.height=12}
+# creating geneList input for pathway analysis
+
+s = minusvplus %>% 
+  filter(sig %in% "UP") %>% 
+  right_join(genesUP.df) %>%
+  dplyr::select(log2FoldChange, ENTREZID)
+
+geneListUP = s$log2FoldChange
+names(geneListUP)= s$ENTREZID
+geneListUP <- sort(geneListUP, decreasing = TRUE)
+head(geneListUP)
+
+
+pathwayUP = enrichPathway(gene =genesUP.df$ENTREZID, 
+              pvalueCutoff = 0.05, 
+              readable=TRUE, 
+              organism = "mouse")
+
+dotplot(pathwayUP)
+
+cnetplot(pathwayUP, foldChange=geneListUP)
+
+```
+```{r, fig.width= 12, fig.height=12}
+s = minusvplus %>% 
+  filter(sig %in% "DOWN") %>% 
+  right_join(genesDOWN.df) %>%
+  dplyr::select(log2FoldChange, ENTREZID)
+
+geneListDOWN = s$log2FoldChange
+names(geneListDOWN)= s$ENTREZID
+geneListUP <- sort(geneListDOWN, decreasing = TRUE)
+head(geneListDOWN)
+
+
+pathwayDOWN = enrichPathway(gene =genesDOWN.df$ENTREZID, 
+              pvalueCutoff = 0.05, 
+              readable=TRUE, 
+              organism = "mouse")
+
+dotplot(pathwayDOWN)
+
+cnetplot(pathwayDOWN, foldChange=geneListDOWN)
+
+```
+```{r, fig.width= 12, fig.height=12}
+s = minusvplus %>% 
+  right_join(genesDE.df) %>%
+  dplyr::select(log2FoldChange, ENTREZID) 
+geneList = s$log2FoldChange
+names(geneList)= s$ENTREZID
+geneListUP <- sort(geneList, decreasing = TRUE)
+head(geneList)
+
+
+pathwayDE = enrichPathway(gene =genesDE.df$ENTREZID, 
+              pvalueCutoff = 0.05, 
+              readable=TRUE, 
+              organism = "mouse")
+
+dotplot(pathwayDE)
+
+cnetplot(pathwayDE, foldChange=geneList)
+
+```
+
+
+
+
